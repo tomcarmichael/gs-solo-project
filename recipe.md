@@ -60,57 +60,10 @@ class Menu
   end
 
   def read
-    @dishes.map { |dish| puts "#{dish.name}: £#{dish.price}" }
+    @dishes.map { |dish| "#{dish.name}: £#{dish.price}" }
   end
 end
 
-class Order
-  @@total_orders = 0
-
-  def initialize(name) # Takes the customer's name, could expand to take address etc
-    @name = name
-    @basket = [] # will contain hashes
-    @@total_orders += 1
-    @order_id = @@total_orders
-  end
-
-  def basket # user can check their basket
-    @basket
-  end
-
-  def name
-    @name
-  end
-
-  def order_id
-    @order_id
-  end
-
-  def order_from(menu) # takes a menu object
-    # Iterate through the menu, displaying each dish with price
-    # use gets.to_i to let user select quantity of each dish,
-    # add {dish: dish.name, quantity: quantity, price: quantity * dish.price} to @basket
-  end
-
-  def confirm_order # Consider breaking this out into a separate class
-    print create_receipt
-    print calculate_total
-    @order_time = Time.now
-    # bonus - ask user for confirmation of order
-    # bonus - use gets for y/n
-  end
-
-  private
-
-  def calculate_total
-    return sum of all price values in @basket
-  end
-
-  def create_receipt
-    # consider creating own class for receipt
-    # iterate over each dish in basket, display all info in hash
-  end
-end
 
 class Confirmation
   def initialize(order) # takes order
@@ -144,7 +97,7 @@ chips = Dish.new("Chips", 2)
 menu = Menu.new
 menu.add(calamari)
 menu.add(chips)
-menu.read => "Calamari: £3\nChips: £2"
+menu.read => ["Calamari: £3", "Chips: £2"]
 ```
 
 ```ruby
