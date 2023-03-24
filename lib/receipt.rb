@@ -12,8 +12,6 @@ class Receipt
   private
 
   def calculate_total
-    @basket.inject do |item, n|
-      item[:cost] + n
-    end
+    @basket.sum {|item| item[:cost] }
   end
 end

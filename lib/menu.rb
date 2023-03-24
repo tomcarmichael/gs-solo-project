@@ -3,9 +3,12 @@ class Menu
     @dishes = [] # Takes an array of dish objects
   end
 
-  def add(dish) # Takes a dish object, optionally expand with optional arguments so multiple dishes can be added
-    fail "Dish is already on the menu" if @dishes.include?(dish)
-    @dishes << dish
+  def add(*dishes) # Can take one or more dish objects, which are always passed in inside an array
+    fail "You didn't provide any dishes to add" if dishes.empty?
+    dishes.each do | dish| 
+      fail "Dish is already on the menu" if @dishes.include?(dish)
+      @dishes << dish
+    end
   end
 
   def remove(dish) # Takes a dish objec

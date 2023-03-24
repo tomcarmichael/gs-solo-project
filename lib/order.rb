@@ -33,14 +33,26 @@ class Order
       @io.puts dish.name
       @io.puts "Quantity:"
       quantity = @io.gets.chomp.to_i
-      @basket << {dish: dish.name, quantity: quantity, cost: (quantity * dish.price) }
+      @basket << {dish: dish.name, quantity: quantity, cost: (quantity * dish.price) } if quantity > 0
     end
   end
 
-  def confirm_order # Consider breaking this out into a separate class
-    @order_time = Time.now
-    Confirmation.new(self) # does this work???
-    # bonus - ask user for confirmation of order
-    # bonus - use gets for y/n
+  def add(dish, quantity) # Dish object, integer
+    @basket << {dish: dish.name, quantity: quantity, cost: (quantity * dish.price) }
+  end
+
+  def remove(dish, quantity) # Dish object, integer
+    # Fail if no hash in the basket array contains dish.name
+    fail "You don't have that dish in your basket" if @basket.all? { |item| item[:dish] != dish.name }  
+    @basket.each do |item|
+      if item[:dish] == dish.name # If the name of dish provided is in the item hash
+        item[:quantity] -= quantity
+        item[:cost] -= (dish.price * quantity)
+      end
+      # Remove item hash from basket if quantity has gone to zero or less
+      if item[:quantity] <= 0
+        @basket.delete(item)
+      end
+    end
   end
 end
