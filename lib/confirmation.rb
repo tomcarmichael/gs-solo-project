@@ -2,10 +2,12 @@ require 'twilio-ruby'
 require 'rubygems'
 
 class Confirmation
-  def initialize(order, receipt_class) # takes order object and Receipt class
+  def initialize(order, receipt_class, messaging_module, io) # takes order object and Receipt class, Twilio::REST::Client, and Kernel
     @order = order
     @order_time = Time.now
     @receipt_class = receipt_class
+    @messaging_module = messaging_module
+    @io = io
     # @receipt = Receipt.new(order.basket)
   end
 
@@ -27,11 +29,10 @@ class Confirmation
     @receipt.print << "Order ID: #{@order.order_id}. Order placed at: #{@order_time.strftime("%H:%M")} by #{@order.name}"
   end
 
-  def notify # TODO
-    # use twilio gem to send user a text message confirming order and delivery time
+  def notify
     account_sid = ENV['TWILIO_ACCOUNT_SID']
     auth_token = ENV['TWILIO_AUTH_TOKEN']
-    @client = Twilio::REST::Client.new(account_sid, auth_token)
+    @client = @messaging_module.new(account_sid, auth_token)
 
     message = @client.messages
       .create(
@@ -39,7 +40,7 @@ class Confirmation
         from: '+14752646904',
         to: '+447917855547'
       )
-    puts message.sid
+    @io.puts message.sid
   end
 end
 
