@@ -16,5 +16,5 @@ order.order_from(menu)
 puts "Basket now contains:"
 puts order.basket
 confirmation = Confirmation.new(order, Receipt, Twilio::REST::Client, Kernel)
-puts confirmation.receipt
+p confirmation.receipt
 confirmation.notify 
