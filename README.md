@@ -1,4 +1,4 @@
-# Makers Academy - Takeawy Challenge
+# Makers Academy - Takeaway Challenge
 
 This repository contains a solution for Makers Academy Takeaway Challange - the final project of the Golden Square module. The four sides of the Golden Square are TDD, OOD, debugging and pair programming. This challenge in particular puts the first three of those into practice since it was completed solo. The [brief](https://github.com/makersacademy/golden-square/blob/main/projects/README.md) consisted of user stories that were used as the starting point for the [recipe.md file](recipe.md). This includes an initial diagram I created to begin to conceptualise the design of the classes in the program. This design was modified and iterated upon during development.
 
@@ -38,6 +38,10 @@ E.g. +447770000000 for a UK number
 Run tests to ensure the project is set up correctly:
 
 `rspec`
+
+Ruby files for classes and `main.rb` are located in `./lib`
+
+Rspec test files are located in `./spec`
 
 ## Usage
 
