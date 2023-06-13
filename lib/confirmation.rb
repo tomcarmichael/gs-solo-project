@@ -37,8 +37,8 @@ class Confirmation
     message = @client.messages
       .create(
         body: "Hello #{@order.name}! Your order has been received and will be delivered by #{delivery_time}. Order ID: #{@order.order_id} ",
-        from: '+14752646904',
-        to: '+447917855547'
+        from: ENV['TWILIO_SENDER_NUMBER'],
+        to: ENV['RECEIVER_PHONE_NUMBER']
       )
     @io.puts message.sid
   end
